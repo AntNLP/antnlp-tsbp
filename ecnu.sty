@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                    							
+%% 	LaTeX Style File for typesetting TEI-Pel thesis presentations
+%% 	Created by Changzhi Sun, Sep 2019
+%%	[czsun.ecnu@gmail.com]
+%%   
+%%  version 1.0 (English & Chinese)
+%%
+%%  Last update: 18/09/2019
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Disclaimer: Use at your own risk
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{my}[18/09/2019 Beamer Layout Package (English & Chinese version)]
+
+\usepackage{xstring}
+\usepackage{calculator}
+
+\edef\logopng{ecnu_logo.png}
+
+\newcommand{\setTeipelLayout}[1]{
+	% choose Beamer theme
+        \usetheme{Antibes}
+		%\usetheme{Warsaw} %<-- well known blue theme
+		%\usetheme{default}\usecolortheme{beaver}%\useoutertheme{default}
+		%\usetheme{PaloAlto}
+		%\usetheme{Warsaw}
+		%\usetheme{Berlin}
+		%\usecolortheme{seahorse}
+		%\usecolortheme{rose}
+		%\usetheme{Berkeley}
+		%\usetheme{boxes}
+		%\usetheme{Bergen}
+		%\usetheme{CambridgeUS} 
+		%\usetheme{Copenhagen}
+		%\usetheme{Darmstadt}
+		%\usetheme{Dresden}
+		%\usetheme{Frankfurt}
+		%\usetheme{Goettingen} 
+		%\usetheme{Hannover}
+		%\usetheme{Ilmenau}
+		%\usetheme{JuanLesPins}
+		%\usetheme{Luebeck}
+        % \usetheme{Madrid}
+		%\usetheme{Malmoe}
+		%\usetheme{Marburg} 
+		%\usetheme{Montpellier}
+		%\usetheme{Pittsburgh}
+		%\usetheme{Rochester}
+		%\usetheme{Singapore} 
+		%\usetheme{Szeged}
+		%\usetheme{Boadilla}
+		%\usetheme{AnnArbor}
+    % Use new Logo (and colors)
+    \IfSubStr{#1}{red}%
+    	{%
+        	\definecolor{myred}{RGB}{190,65,65}
+        }%
+        {%
+        	\definecolor{myred}{RGB}{85, 85, 57}
+        }        
+	% set colors
+		
+        \setbeamercolor{alerted text}{fg=red}
+        \setbeamercolor{background canvas}{bg=myred!10}
+        \setbeamercolor{block body alerted}{bg=white, fg=red}
+        \setbeamercolor{block body}{bg=orange!40}
+        \setbeamercolor{block body example}{fg=myred!60!black, bg=gray!30}
+        \setbeamercolor{block title alerted}{fg=white, bg=red}
+        \setbeamercolor{block title}{bg=myred}
+        \setbeamercolor{block title example}{bg=myred!70!black,fg=white}
+        \setbeamercolor{fine separation line}{}
+        \setbeamercolor{frametitle}{fg=white}
+        \setbeamercolor{item projected}{fg=white}
+        % \setbeamercolor{normal text}{bg=myred!60,fg=myred!60!black}
+        \setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
+        \setbeamercolor{palette sidebar quaternary}{use=structure,fg=structure.fg}
+        \setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+        \setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+        \setbeamercolor{section in sidebar}{fg=brown}
+        \setbeamercolor{section in sidebar shaded}{fg=gray}
+        \setbeamercolor{section in toc}{fg=normal text.fg, bg=normal text.bg}
+        \setbeamercolor{separation line}{}
+        \setbeamercolor{sidebar}{bg=red}
+        \setbeamercolor{sidebar}{parent=palette primary}
+        \setbeamercolor{structure}{bg=myred, fg=myred}
+        \setbeamercolor{subsection in sidebar}{fg=brown}
+        \setbeamercolor{subsection in sidebar shaded}{fg=gray}
+        \setbeamercolor{subsection in toc}{fg=normal text.fg, bg=normal text.bg}
+        \setbeamercolor{title}{fg=white}
+        \setbeamercolor{titlelike}{fg=brown}
+        \setbeamercolor{itemize item}{fg=myred}
+        %\setbeamercolor*{bibliography entry title}{fg=black}
+        %\setbeamercolor*{bibliography entry author}{fg=black}
+        \setbeamercolor*{bibliography entry location}{fg=myred}
+        \setbeamercolor*{bibliography entry note}{fg=black}
+    % remove beamer's navigation bar	
+        \setbeamertemplate{navigation symbols}{}		
+    % Comment to completely cover next transparencies %%
+        \setbeamercovered{transparent=30}
+    % Table of contents before each Section
+        \AtBeginSubsection[]{
+          \frame<beamer>{ 
+            \frametitle{Contents}   
+            \tableofcontents[currentsection,currentsubsection] 
+          }
+        }
+    % Add draft watermark
+    \IfSubStr{#1}{draft}%
+        {%
+            \usepackage{tikz}%
+            \setbeamertemplate{background}{%
+                \begin{tikzpicture}[remember picture, overlay]
+                    \node[rotate=90, anchor=west, xshift=45pt, yshift=-10pt] at (current page.south west){\textcolor{gray!60}{孙长志}};%
+                \end{tikzpicture}%
+            }%
+        }{}
+}
+
+\newcommand{\supervisor}[3]{
+	% \subtitle{\textsc{Thesis}}
+    % \logo{
+        % \begin{tabular}{c}
+            % \includegraphics[height=0.7cm,keepaspectratio]{\logopng} \\
+            % \color{myred}\scalebox{1.7}{\insertframenumber/\inserttotalframenumber} 
+            % % \insertframenumber/\inserttotalframenumber
+        % \end{tabular}
+    % }
+    \institute{华东师范大学\\计算机科学与技术学院 \\[5pt]{\includegraphics[height=1.5cm,keepaspectratio]{\logopng}}\\[5pt] \scalebox{0.9}{#1： #2\ #3}}
+    % \institute{East China Normal University\\Department of Computer Science \& Technology  \\[5pt]{\includegraphics[height=1.5cm,keepaspectratio]{\logopng}}\\[5pt] \scalebox{0.9}{#1： #2\ #3}}
+	% \institute{East China Normal University\\Department of Computer Science \& Technology  \\[5pt]{\includegraphics[height=1.5cm,keepaspectratio]{\logopng}}\\[5pt] \scalebox{0.9}{#1 #2\ #3}}
+}
+
+\setbeamertemplate{footline}{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{输入颜色}
+% \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+% \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+\end{beamercolorbox}
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{输入颜色}
+% \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+% \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+\end{beamercolorbox}
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{输入颜色}
+% \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+% \insertframenumber{} / \inserttotalframenumber\hspace*{4ex}
+\color{myred}{\insertframenumber/\inserttotalframenumber}  \hspace*{3ex}
+\end{beamercolorbox}
+}%
+% \vskip0pt%
+}
+
+\addtobeamertemplate{frametitle}{}{%
+ 	\begin{tikzpicture}[remember picture,overlay]
+ 	\node[anchor=north east,yshift=-24.5pt] at (current page.north east) {\includegraphics[height=0.9cm]{ecnu_logo.png}};
+ 	\end{tikzpicture}
+}
+\newcommand{\presentationDate}[1]{
+	\date{\tiny{#1}}
+}
+
+\newcommand{\typesetFrontSlides}{
+	\begin{frame}[plain]
+	  \titlepage
+	\end{frame}
+    \begin{frame}[plain]{提纲}
+	% \begin{frame}[plain]{Outline}
+	  \tableofcontents
+	\end{frame}
+}
+
+
+% format multiple author names in title page
+\makeatletter
+    \long\def\beamer@author[#1]#2{%
+      \def\insertauthor{\def\inst{\beamer@insttitle}%
+    \def\and{\beamer@andtitle}%
+    \noexpandarg\StrCount{#2}{\and}[\numberofauthorsminusone]%
+    \ADD{1}{\numberofauthorsminusone}{\numberofauthors}%
+    \DIVIDE{1}{\numberofauthors}{\columnwidthfactor}%
+    \renewcommand\and{\column{\columnwidthfactor\textwidth}\centering}%
+    \begin{columns}[t,onlytextwidth]%
+        \column{\columnwidthfactor\textwidth}\centering%
+        #2%
+    \end{columns}%
+    }%
+      \def\beamer@shortauthor{#1}%
+      \ifbeamer@autopdfinfo%
+        \def\beamer@andstripped{}%
+        \beamer@stripands#1 \and\relax
+        {\let\inst=\@gobble\let\thanks=\@gobble%
+        \def\and{, }\hypersetup{pdfauthor={\beamer@andstripped}}}
+      \fi%
+}
+\makeatother
+
+
+\endinput
