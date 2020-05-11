@@ -17,6 +17,7 @@
 
 \usepackage{xstring}
 \usepackage{calculator}
+\usepackage{tikz}%
 
 \edef\logopng{ecnu_logo.png}
 
@@ -110,7 +111,6 @@
     % Add draft watermark
     \IfSubStr{#1}{draft}%
         {%
-            \usepackage{tikz}%
             \setbeamertemplate{background}{%
                 \begin{tikzpicture}[remember picture, overlay]
                     \node[rotate=90, anchor=west, xshift=45pt, yshift=-10pt] at (current page.south west){\textcolor{gray!60}{孙长志}};%
